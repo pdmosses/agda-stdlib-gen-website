@@ -14,10 +14,10 @@
 
 cd ../agda-stdlib
 
-if [ -d .github/workflows ]; then
-  echo Disable CI workflows
-  mv .github/workflows .disabled;
-fi
+# if [ -d .github/workflows ]; then
+#   echo Disable CI workflows
+#   mv .github/workflows .disabled;
+# fi
 
 echo Copy fixed files
 
