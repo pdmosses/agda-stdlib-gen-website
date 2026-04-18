@@ -25,6 +25,7 @@ cp -r ../agda-stdlib-gen-website/docs .
 cp ../agda-stdlib-gen-website/Makefile .
 cp ../agda-stdlib-gen-website/mkdocs.yml .
 cp ../agda-stdlib-gen-website/.gitignore .
+cp ../agda-stdlib-gen-website/skip.txt .
 
 echo Update README.md
 

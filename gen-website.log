@@ -1,0 +1,10 @@
+Copy fixed files
+Update README.md
+Generate Everything
+Preprocessing executable 'GenerateEverything' for agda-stdlib-utils-2.4..
+Building executable 'GenerateEverything' for agda-stdlib-utils-2.4..
+Running GenerateEverything...
+Generate a website
+Checked ./index.agda
+Generated HTML pages in docs
+Generated MD pages in docs
