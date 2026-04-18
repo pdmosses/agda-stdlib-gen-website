@@ -329,7 +329,7 @@ ifneq ($(filter docs docs/%,$(HTML)),)
 	    \
 	    if   [ "$${module}" == "index" ] && [ "$(MD-INDEX)" == "index" ] && \
 		 [ "$(HTML)" == "$(MD)" ]; then \
-		page2html="/../"; \
+		page2html="."; \
 	    else \
 		page2html=""; \
 	    fi; \
@@ -731,7 +731,10 @@ DIR:     $(DIR)
 ROOT:    $(ROOT)
 HTML:    $(HTML)
 MD:      $(MD)
-INDEX:   $(HTML-INDEX)
+
+HTML-INDEX: $(HTML-INDEX)
+MD-INDEX:   $(HTML-INDEX)
+
 SITE:    $(SITE)
 TEMP:    $(TEMP)
 VERSION: $(VERSION)
