@@ -14,10 +14,8 @@
 
 cd ../agda-stdlib
 
-# if [ -d .github/workflows ]; then
-#   echo Disable CI workflows
-#   mv .github/workflows .disabled;
-# fi
+# Refer to fork https://github.com/pdmosses/agda-stdlib instead of upstream repo
+cp ../agda-stdlib-gen-website/ci-ubuntu.yml .github/workflows/
 
 echo Copy fixed files
 
