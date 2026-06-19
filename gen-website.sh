@@ -2,44 +2,46 @@
 
 # Generate a website for a version of agda-stdlib
 
-# WARNING:
-# NOT YET TESTED FOR POTENTIAL FAILURES
-
 # Usage:
 # cd agda-stdlib-gen-website
 # sh gen-website.sh
 
-# Assumption:
-# The projects `agda-stdlib` and `agda-stdlib-gen-website` are siblings.
+# Assumption: agda-stdlib, agda-stdlib-gen-website, agda2website are siblings
 
 cd ../agda-stdlib
 
-# Refer to fork https://github.com/pdmosses/agda-stdlib instead of upstream repo
-cp ../agda-stdlib-gen-website/ci-ubuntu.yml .github/workflows/
+mkdir -p website
 
-echo Copy fixed files
+# Copy agda2website to website for local testing
 
-cp -r ../agda-stdlib-gen-website/docs .
-cp ../agda-stdlib-gen-website/Makefile .
-cp ../agda-stdlib-gen-website/mkdocs.yml .
-cp ../agda-stdlib-gen-website/.gitignore .
-cp ../agda-stdlib-gen-website/skip.txt .
+cp -R ../agda2website/ website/agda2website
 
-echo Update README.md
+# Copy agda-stdlib-gen-website/website files:
+#  - docs/
+#  - Makefile
+#  - mkdocs.yml
 
-cp ../agda-stdlib-gen-website/README-new.md .
-sd '\A(.|\n)*====*\n' '' README.md
-cat README.md >> README-new.md
-mv -f README-new.md README.md
+cp -R ../agda-stdlib-gen-website/website/ website
 
-echo Generate Everything
+# Copy agda-stdlib-gen-website/tooling files:
+#  - landing-top.html
+#  - landing.sh
 
-cp .github/tooling/* .
-cabal run GenerateEverything
-./index.sh
+cp -R ../agda-stdlib-gen-website/tooling/ .github/tooling
 
-echo Generate a website
+# Patch .github/workflows/ci-ubuntu.yml:
 
-make -f Makefile check
-make -f Makefile clean-all
-make -f Makefile web
+sd  'https://github.com/agda/agda-stdlib' \
+    'https://github.com/${{ env.GITHUB_REPOSITORY }}' \
+    .github/workflows/ci-ubuntu.yml
+
+# Generate and preview the website:
+
+cd website
+
+make index
+make check
+make web
+make serve
+
+echo "To publish the website: make deploy VERSION=..."
